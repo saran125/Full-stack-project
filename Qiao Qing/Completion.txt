@@ -1,0 +1,15 @@
+Done:
+- Know how to construct Table in SQL DONE
+- Know how to construct Values in Table in SQL DONE
+- Home and Movies Handlebars DONE
+//Home Page
+  -Edit1 DONE
+  -Edit2 DONE
+//Movie Page
+  -Edit1 DONE
+  -Edit2 - UPDATE DONE CREATE DONE
+
+Need to do:
+- Home and Product Listing Page Navigation (Page Link embedded within buttons)
+- Set models/tables
+- More incoming :'D
