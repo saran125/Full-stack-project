@@ -1,0 +1,33 @@
+<link rel="stylesheet" type="text/css" href="public/css/edithomeimagepolicy.css" media="screen"/>
+
+<body>
+<h1 class="display-4">Edit Home Policy and Images</h1>
+
+<form method="post" action="templates/edithomedescription" name="">
+  <div class="form-group">
+  <h5>Home Image</h5>
+  <input type="homeimage" name="homeimage" class="form-control" value="{{homeimage}}" required>
+  </div>
+
+  <h5>Home Policy</h5>
+  <div class="form-group">
+    <input type="homepolicy" name="homepolicy" class="form-control" value="{{homepolicy}}" required>
+  </div>
+
+  <h5>Policy Image</h5>
+  <div>
+  <input type="policyimage" name="policyimage" class="form-control" value="{{policyimage}}" required>
+  </div>
+  
+  <div class="blackblock1">
+  </div>
+
+  <div class="submit">
+  <input class="btn" id="query" type="submit">
+  </div>
+
+  <div class="blackblock2">
+  </div>
+
+</form>
+</body>

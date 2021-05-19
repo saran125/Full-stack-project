@@ -1,0 +1,37 @@
+<link rel="stylesheet" type="text/css" href="public/css/createmovies.css" media="screen"/>
+<h1 class="display-4">Update Movies</h1>
+
+<form method="POST" action="" name="" enctype="multipart/form-data">
+  
+  <div class="form-group">
+  <h5>Movie Image</h5>
+  <input type="movie_image" name="movie_image" class="form-control" value="{{movie_image}}" required>
+  </div>
+
+  <div class="form-group">
+  <h5>Movie Name</h5>
+  <input type="movie_name" name="movie_name" class="form-control" value="{{movie_name}}" required>
+  </div>
+
+  <div class="form-group">
+  <h5>Movie Age Rating</h5>
+  <input type="movieagerating" name="movieagerating" class="form-control" value="{{movieagerating}}" required>
+  </div>
+
+  <div class="form-group">
+  <h5>Movie Duration</h5>
+  <input type="movieduration" name="movieduration" class="form-control" value="{{movieduration}}" required>
+  </div>
+
+  <div class="form-group">
+    <h5>Movie Genres</h5>
+    <input class="field" id="query" type="submit">
+    <br>
+    <!-- {{ field }} {{ field.label }} -->
+  </div>
+
+  <div class="submit">
+    <input class="btn" id="query" type="submit">
+  </div>
+
+</form>
