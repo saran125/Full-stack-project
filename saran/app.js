@@ -1,12 +1,9 @@
 import Express         from 'express';
 import ExpHandlebars   from 'express-handlebars';
-import ExpSession      from 'express-session';
 import BodyParser      from 'body-parser';
 import CookieParser    from 'cookie-parser';
 import MethodOverrides from 'method-override';
 import Path            from 'path';
-import Flash           from 'connect-flash';
-import FlashMessenger  from 'flash-messenger';
 
 import Handlebars      from 'handlebars';
 import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access';
