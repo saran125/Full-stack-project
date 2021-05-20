@@ -26,11 +26,11 @@ export class ModelUser extends Model {
 			"uuid"       : { type: DataTypes.CHAR(36),    primaryKey: true, defaultValue: DataTypes.UUIDV4 },
 			"dateCreated": { type: DataTypes.DATE(),      allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
 			"dateUpdated": { type: DataTypes.DATE(),      allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
-			"choice"   : { type: DataTypes.STRING(64),  allowNull: false },
+			"choice"   : { type: DataTypes.STRING(20),  allowNull: false },
 			"location"      : { type: DataTypes.STRING(128), allowNull: false },
-			"date"   : { type: DataTypes.STRING(64),  allowNull: false },
-			"time"   : { type: DataTypes.STRING(64),  allowNull: false },
-			"roomtype"   : { type: DataTypes.STRING(64),  allowNull: false },
+			"date"   : { type: DataTypes.STRING(30),  allowNull: false },
+			"time"   : { type: DataTypes.STRING(30),  allowNull: false },
+			"roomtype"   : { type: DataTypes.STRING(30),  allowNull: false },
 			"verified"   : { type: DataTypes.BOOLEAN,     allowNull: false, defaultValue: false }
 		}, {
 			"sequelize": database,
