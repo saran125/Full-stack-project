@@ -1,28 +1,113 @@
-<link rel="stylesheet" type="text/css" href="public/css/choosemoviesandsongs.css" media="screen"/>
+<style>
+body {
+    background-color: black;
+  }
+  
+div.MovieInfo, div.SongInfo {
+  width: 150px;
+  }
+
+div.blackblock1 {
+    background-color: black;
+    width: 800px;
+    height: 10px;
+  }
+  
+.btn#query {
+    background-color: black;
+    color: gold;
+    border: 1px solid white;
+  }
+  
+.btn#query:hover {
+    background-color: grey;
+    color: white;
+ }
+
+ div.ChooseMovie {
+  float: left;
+  width: 350px;
+ }
+
+ div.ChooseSong {
+  float: left;
+  top: 92px;
+  left: 375px;
+  width: 350px;
+ }
+
+ div.CreateMoviesAndSongs {
+  left: 375px;
+ }
+</style>
+
 <body>
 <div class="ChooseMovie">
-    <div class="MovieName">
-        <h5>Movie Title</h5>
-        <h6>Movie Rating<br>Movie Durating</h6>
-
-        <div class="submit">
-            <input value="Update" class="btn" id="query" type="submit">
-        </div>
-        
-        <div class="blackblock1"></div>
-
-        <div class="submit">
-            <input value="Delete" class="btn" id="query" type="submit">
-        </div>
-        <hr>
+    <div class="MovieInfo">
+        <h5>Movie Title1</h5>
+        <h6>Movie AgeRating1<br>Movie Duration1</h6>
     </div>
+    <div class="submit">
+        <input value="Update" class="btn" id="query" type="submit">
+    </div>
+    <div class="blackblock1"></div>
+    <div class="submit">
+        <input value="Delete" class="btn" id="query" type="submit">
+    </div>
+    <hr> 
+
+    <div class="MovieInfo">
+        <h5>Movie Title2</h5>
+        <h6>Movie AgeRating2<br>Movie Duration2</h6>
+    </div>
+    <div class="submit">
+        <input value="Update" class="btn" id="query" type="submit">
+    </div>
+    <div class="blackblock1"></div>
+    <div class="submit">
+        <input value="Delete" class="btn" id="query" type="submit">
+    </div>
+    <hr>
+    
 </div>
+
+<div class="ChooseSong">
+    <div class="SongInfo">
+        <h5>Song Title1</h5>
+        <h6>Song AgeRating1<br>Song Duration1</h6>
+    </div>
+    <div class="submit">
+        <input value="Update" class="btn" id="query" type="submit">
+    </div>
+    <div class="blackblock1"></div>
+    <div class="submit">
+        <input value="Delete" class="btn" id="query" type="submit">
+    </div>
+    <hr>
+    <div class="SongInfo">
+        <h5>Song Title2</h5>
+        <h6>Song AgeRating2<br>Song Duration</h6>
+    </div>
+    <div class="submit">
+        <input value="Update" class="btn" id="query" type="submit">
+    </div>
+    <div class="blackblock1"></div>
+    <div class="submit">
+        <input value="Delete" class="btn" id="query" type="submit">
+    </div>
+    <hr>
+        
+</div>
+
+<div class="CreateMoviesAndSongs">
     <div class="submit">
         <input value="Create Movies" class="btn" id="query" type="submit">
     </div>
     <div class="blackblock1"></div>
-
     <div class="submit">
         <input value="Create Songs" class="btn" id="query" type="submit">
     </div>
+    <div class="blackblock1"></div>
+</div>
+
 </body>
