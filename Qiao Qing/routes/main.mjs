@@ -77,44 +77,21 @@ async function edithomedescription_page(req, res) {
 	return res.render('edithomedescription');
 };
 
-// /**
-// * Renders the login page
-// * @param {Request}  req Express Request handle
-// * @param {Response} res Express Response handle
-// */
-// async function edithomedescription_process(req, res) {
-//	try {
-//		const homedes = await ModelHomeDescription.create({
-//			"email" : req.body.email,
-//			"homeid" : req.body.homeid,
-//			"homedescription": req.body.homedescription
-//		});
-//		console.log('Description created: $(homedes.email)');
-//		return res.redirect("/prodlist", { errors: errors });
-//	}	
-//	catch (error) {
-//		console.error(`Credentials problem: ${req.body.email}`);
-//		console.error(error);
-		//return res.render(home_page, { errors: errors });
-		//return res.redirect(home_page, { errors: errors });
-//	}
-//}
-
-/**
+ /**
  * Renders the login page
  * @param {Request}  req Express Request handle
  * @param {Response} res Express Response handle
  */
-async function edithomedescription_process(req, res) {
+ async function edithomedescription_process(req, res) {
 	try {
-		const homedes = await ModelHomeDescription.findOne({
-			where: {
-			"email" : "root@mail.com"
-			}
-	});
-	console.log('Description created: $(homedes.email)');
-	return res.redirect("/prodlist", { errors: errors });
-	
+		const homedes = await ModelHomeDescription.create({
+			"email" : req.body.email,
+			"homeid" : req.body.homeid,
+			"homedescription": req.body.homedescription
+		});
+		console.log('Description created: $(homedes.email)');
+		return res.redirect("/prodlist", { errors: errors });
+	}	
 	catch (error) {
 		console.error(`Credentials problem: ${req.body.email}`);
 		console.error(error);
