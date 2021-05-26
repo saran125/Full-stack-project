@@ -1,15 +1,21 @@
 Done:
 - Know how to construct Table in SQL DONE
 - Know how to construct Values in Table in SQL DONE
-- Home and Movies Handlebars DONE
+- Set models/tables
+
+- Home and Movies Handlebars
 //Home Page
   -Edit1 DONE
   -Edit2 DONE
 //Movie Page
   -Edit1 DONE
-  -Edit2 - UPDATE DONE CREATE DONE
+  -Edit2 - 
+  //UPDATE SONG, MOVIE DONE 
+  //CREATE SONG, MOVIE DONE
 
 Need to do:
 - Home and Product Listing Page Navigation (Page Link embedded within buttons)
-- Set models/tables
+- File Upload
+- UserID on routes
+- Security
 - More incoming :'D
