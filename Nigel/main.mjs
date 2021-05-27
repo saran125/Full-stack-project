@@ -1,5 +1,5 @@
 import { Router }       from 'express';
-import { flashMessage } from '../utils/flashmsg.mjs'
+import { flashMessage } from '../utils/flashmsg.mjs';
 
 const router = Router();
 export default router;
@@ -12,9 +12,10 @@ router.get("/dynamic/:path", async function (req, res) {
 
 // ---------------- 
 //	TODO: Attach additional routers here
-import RouterAuth from './auth.mjs'
+import RouterAuth from './auth.mjs';
+import RouterReview from './review.mjs';
 router.use("/auth", RouterAuth);
-
+router.use("/review", RouterReview);
 
 router.get("/", async function (req, res) {
 	return res.redirect("/home");
@@ -37,8 +38,3 @@ router.get("/faq", async function(req,res) {
 });
 
 
-router.get("/review",  function(req, res) {
-	console.log("Customer review page accessed");
-	return res.render('review', {
-	});
-});

@@ -1,0 +1,12 @@
+.logo {
+	width : 130px;
+	margin: auto;
+}
+body{
+	font-family:arial,sans-serif;
+	font-size:100%;
+	margin:1em;
+	background:black;
+	color:gold;
+	text-align:center;
+  }

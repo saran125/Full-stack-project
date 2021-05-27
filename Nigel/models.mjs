@@ -3,7 +3,7 @@ import ORM    from 'sequelize';
 const { Sequelize } = ORM;
 
 import { ModelUser } from './user.mjs';
-
+import { ModelReview} from './review.mjs';
 /**
  * @param database {ORM.Sequelize}
  */
@@ -12,7 +12,7 @@ export function initialize_models(database) {
 		console.log("Intitializing ORM models");
 		//	Initialzie models
 		ModelUser.initialize(database);
-		
+		ModelReview.initialize(database);
 		console.log("Building ORM model relations and indices");
 		//	Create relations between models or tables
 		//	Setup foreign keys, indexes etc
@@ -43,13 +43,9 @@ export function initialize_models(database) {
 			uuid    : "00000000-0000-0000-0000-000000000000",
 			name    : "root",
 			email   : "root@mail.com",
-			role    : "customer",
-
+			role    : "admin",
 			verified: true,
-			password: Hash.sha256().update("P@ssw0rd").digest("hex"),
-			rating: "5",
-			feedback: "It is good"
-
+			password: Hash.sha256().update("P@ssw0rd").digest("hex")
 		};
 		//	Find for existing account with the same id, create or update
 		var account = await ModelUser.findOne({where: { "uuid": root_parameters.uuid }});
@@ -67,4 +63,3 @@ export function initialize_models(database) {
 		return Promise.reject(error);
 	}
 }
-
