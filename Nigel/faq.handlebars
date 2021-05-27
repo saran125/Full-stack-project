@@ -1,0 +1,97 @@
+
+<h1 class="display-4"style="text-align:center">FAQ</h1>
+<t class="display-4"></t>
+<t class="display-4"></t>
+
+<t1>These are the answers to the 10 commonly asked FAQs </t1>
+
+<t class="display-4"></t>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: black;
+  color:gold;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  text-align:center;
+}
+
+.active, .collapsible:hover {
+  background-color:rgb(197, 153, 8);
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.7s ease-out;
+  background-color:black;
+  color:gold;
+}
+</style>
+</head>
+<body>
+
+
+<button class="collapsible"style="color:gold">Why is </button>
+<div class="content">
+  <p>Yes</p>
+</div>
+<button class="collapsible"style="color:gold">How do i</button>
+<div class="content">
+  <p>No</p>
+</div>
+<button class="collapsible"style="color:gold">What is </button>
+<div class="content">
+  <p>Yes</p>
+</div>
+<button class="collapsible"style="color:gold">when it</button>
+<div class="content">
+  <p>Yes</p>
+</div>
+<button class="collapsible"style="color:gold">Can i</button>
+<div class="content">
+  <p>No</p>
+</div>
+<button class="collapsible"style="color:gold">Can i</button>
+<div class="content">
+  <p>No</p>
+</div>
+<button class="collapsible"style="color:gold">Can i</button>
+<div class="content">
+  <p>No</p>
+</div>
+<button class="collapsible"style="color:gold">Can i</button>
+<div class="content">
+  <p>No</p>
+</div>
+<button class="collapsible"style="color:gold">Can i</button>
+<div class="content">
+  <p>No</p>
+</div>
+<button class="collapsible"style="color:gold">Can i</button>
+<div class="content">
+  <p>No</p>
+</div>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
