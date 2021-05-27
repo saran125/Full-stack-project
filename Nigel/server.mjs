@@ -92,3 +92,19 @@ console.log(`===========================`);
 Server.listen(Port, function() {
 	console.log(`Server listening at port ${Port}`);
 });
+import { SessionStore, initialize_database } from './data/database.mjs'
+/**
+ * Express Session
+ */
+ Server.use(ExpSession({
+	name:   'example-app',
+	secret: 'random-secret',
+	store:   SessionStore,
+	resave:  false,
+	saveUninitialized: false
+}));
+
+/**
+ * Initialize database
+ */
+initialize_database(false);
