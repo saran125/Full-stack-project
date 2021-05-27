@@ -1,8 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-
-
-@import url(https://fonts.googleapis.com/css?family=Lato:400, 700,300);
+<style>@import url(https://fonts.googleapis.com/css?family=Lato:400, 700,300);
 body {
   background-color: #ffb242;
   font-family: lato, 'helvetica-light';
@@ -34,7 +30,7 @@ body {
   width: 150px;
   border-radius: 8px;
   height: 42px;
-  font-size: 20px;
+  font-size: 12px;
   font-family: lato, 'helvetica-light', 'sans-serif';
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -47,14 +43,7 @@ body {
 #card-btn:hover {
   background-color: rgba(251, 251, 251, 1);
 }
-.card{
-float:right;
-position: relative;
-top: -45px;
-color: black;
-font-size: 12px;
-font-weight: bold;
-}
+
 #card-cvc {
   width: 60px;
   margin-bottom: 0;
@@ -71,8 +60,8 @@ font-weight: bold;
   box-sizing: border-box;
   font-size: 10px;
   letter-spacing: 1px;
-  font-weight: bold;
-  color: black;
+  font-weight: 300;
+  color: white;
 }
 
 #card-image {
@@ -85,12 +74,10 @@ font-weight: bold;
 }
 
 #card-month {
-  width: 100%;
+  width: 45% !important;
 }
 
-#card-number{
-width: 100%}
-
+#card-number,
 #card-holder {
   width: 100%;
 }
@@ -112,7 +99,8 @@ width: 100%}
 }
 
 #card-year {
-  width: 100%;
+  width: 45%;
+  float: right;
 }
 
 #cardholder-container {
@@ -123,7 +111,7 @@ width: 100%}
 #cvc-container {
   position: absolute;
   width: 110px;
-  right: -105px;
+  right: -115px;
   bottom: -10px;
   padding-left: 20px;
   box-sizing: border-box;
@@ -134,7 +122,7 @@ width: 100%}
 }
 
 #cvc-container p {
-  font-size: 10px;
+  font-size: 6px;
   text-transform: uppercase;
   opacity: 0.6;
   letter-spacing: .5px;
@@ -147,11 +135,40 @@ width: 100%}
   position: relative;
 }
 
+#form-errors {
+  color: #eb0000;
+}
+
+#form-errors,
+#card-success {
+  background-color: white;
+  width: 500px;
+  margin: 0 auto 10px;
+  height: 50px;
+  border-radius: 8px;
+  padding: 0 20px;
+  font-weight: 400;
+  box-sizing: border-box;
+  line-height: 46px;
+  letter-spacing: .5px;
+  text-transform: none;
+}
+
+#form-errors p,
+#card-success p {
+  margin: 0 5px;
+  display: inline-block;
+}
+
 #exp-container {
   margin-left: 10px;
   width: 32%;
   display: inline-block;
   float: right;
+}
+
+.hidden {
+  display: none;
 }
 
 #image-container {
@@ -167,23 +184,8 @@ width: 100%}
   right: 0;
   top: 0;
 }
-.exp-year,
-.exp-month{
-border: none;
-  outline: none;
-  background-color: #5a9def;
-  height: 20px;
-  line-height: 20px;
-  padding: 0 10px;
-  margin: 0 0 25px;
-  color: white;
-  font-size: 5px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  font-family: lato, 'helvetica-light', 'sans-serif';
-  letter-spacing: .7px;
-  }
-.input {
+
+input {
   border: none;
   outline: none;
   background-color: #5a9def;
@@ -197,6 +199,47 @@ border: none;
   border-radius: 4px;
   font-family: lato, 'helvetica-light', 'sans-serif';
   letter-spacing: .7px;
+}
+
+input::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.7;
+  font-family: lato, 'helvetica-light', 'sans-serif' letter-spacing: 1px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 10px;
+}
+
+input:-moz-placeholder {
+  color: #fff;
+  opacity: 0.7;
+  font-family: lato, 'helvetica-light', 'sans-serif' letter-spacing: 1px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 10px;
+}
+
+input::-moz-placeholder {
+  color: #fff;
+  opacity: 0.7;
+  font-family: lato, 'helvetica-light', 'sans-serif' letter-spacing: 1px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 10px;
+}
+
+input:-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.7;
+  font-family: lato, 'helvetica-light', 'sans-serif' letter-spacing: 1px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 10px;
+}
+
+input.invalid {
+  border: solid 2px #eb0000;
+  height: 34px;
 }
 
 label {
@@ -217,61 +260,40 @@ label {
   -moz-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </style>
-</head>
-<body>
-<form method="POST" action="/ticket">
 <div id="form-container">
 
   <div id="card-front">
     <div id="shadow"></div>
     <div id="image-container">
-      <span id="amount">paying:
-
-          <strong>$30</strong>
-
-      </span>
-  </div>
-      <div class ='card'>
-         <label>Accepted Cards</label>
-
-              <i class="fa fa-cc-visa" style="font-size: 28px"></i>
-              <i class="fa fa-cc-paypal" style="font-size: 28px"></i>
-              <i class="fa fa-cc-mastercard" style="font-size: 28px"></i>
-              <i class="fa fa-credit-card" style="font-size: 28px"></i>
-          </div>
+      <span id="amount">paying: <strong>$28</strong></span>
       <span id="card-image">
-
+      
         </span>
-
-
+    </div>
     <!--- end card image container --->
 
-    <label>
+    <label for="card-number">
         Card Number
       </label>
-
-          <input type="number" name="card_number" class="form-control" value="{{card_number}}" required>
-
-          <div id="cardholder-container">
-      <label >Card Holder
+    <input type="text" id="card-number" placeholder="1234 5678 9101 1112" length="16" value="{{card_number}}" required>
+    <div id="cardholder-container">
+      <label for="card-holder">Card Holder
       </label>
-      <input type="text" name="holder" class="form-control" value="{{card_holder}}" required>
+      <input type="text" id="card-holder" placeholder="e.g. Mark Tan" value="{{card_holder}}"  required/>
     </div>
     <!--- end card holder container --->
     <div id="exp-container">
-      <label>
+      <label for="card-exp">
           Expiration
         </label>
-         <input type="number" name="card_number" class="form-control" value="{{month}}" required>
-         <input type="number" name="card_number" class="form-control" value="{{year}}" required>
-
+      <input id="card-month" type="text" placeholder="MM" length="2" required value="{{expiry_month}}" >
+      <input id="card-year" type="text" placeholder="YY" length="2" required value="{{expiry_year}}">
     </div>
         <div id="cvc-container">
-      <label> CVV</label>
-             <input type="number" name="cvv_number" class="form-control" value="{{cvv_number}}" required>
-      <p>Last 3 digits</p>
+      <label for="card-cvc"> CVV</label>
+      <input id="card-cvc" placeholder="XXX-X" type="text" min-length="3" max-length="3" required value="{{cvv}}" >
+      <p>Last 3  digits</p>
     </div>
     <!--- end CVC container --->
     <!--- end exp container --->
@@ -283,10 +305,12 @@ label {
 
   </div>
   <!--- end card back --->
-  <input type="submit" value="submit" id="card-btn" />
+  <input type="text" id="card-token" />
+  <a href="/ticket"> 
+  <button type="button" id="card-btn">Submit</button>
+  </a>
 </div>
-</form>
+<!--- end form container --->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script src="https://use.fontawesome.com/f1e0bf0cbc.js"></script>

@@ -155,10 +155,11 @@ ol li a{color:#fff;}
     </li>
   </ul>
         </div>
-  <form method="post" action="/roomtype">
+  <form method="post" action="/booking">
   <table class="table align-middle">
   <thead class="thead-light">
     <tr>
+      <th scope="col">Choice </th>
       <th scope="col">Date</th>
       <th scope="col">Time</th>
       <th scope="col">Location</th>
@@ -167,23 +168,27 @@ ol li a{color:#fff;}
   </thead>
   <tbody>
     <tr>
-        <td><select >
-  <option >17th May</option>
-  <option >18th May</option>
-  <option >19th May</option>
-  <option >20th May</option>
+      <td><select  >
+  <option value="{{choice}}">Movie</option>
+  <option value="{{choice}}">karaoke</option>
 </select></td>
-      <td><select >
-  <option>9am</option>
-  <option >12pm</option>
-  <option >3pm</option>
-  <option >9pm</option>
+        <td><select >
+  <option value="{{date}}">17th May</option>
+  <option value="{{date}}">18th May</option>
+  <option value="{{date}}">19th May</option>
+  <option value="{{date}}">20th May</option>
+</select></td>
+      <td><select  >
+  <option value="{{time}}">9am</option>
+  <option value="{{time}}">12pm</option>
+  <option value="{{time}}">3pm</option>
+  <option value="{{time}}">6pm</option>
 </select></td><td>
-<select>
-  <option>Bishan</option>
-  <option >AMK Hub</option>
-  <option >OTH</option>
-  <option >Northpoint</option>
+<select >
+  <option value="{{location}}">Bishan</option>
+  <option value="{{location}}">AMK Hub</option>
+  <option value="{{location}}">OTH</option>
+  <option value="{{location}}">Northpoint</option>
 </select></td>
       <td> <input type="submit" value="Submit" class="btn btn-primary"/></td>
     </tr>

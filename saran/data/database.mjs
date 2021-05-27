@@ -1,19 +1,37 @@
 import ExpSessionStore from 'express-mysql-session';
 import ORM             from 'sequelize';
 
-const { Sequelize, DataTypes, Model } = ORM;
+const { Sequelize, Model, Op } = ORM;
 
 import {initialize_models } from './models.mjs';
 
 /**
  * Database configuration
  */
-export const Config = {
-	database: 'db_test',
+const Config = {
+	database: 'booking',
 	username: 'root',
 	password: 'password',
-	host    : 'localhost'
+	host    : 'localhost',
+	port    : 3306
 };
+
+
+/**
+ * Create a mysql connection pool that handles reconnection to database.
+ * This is to be used with Express Session
+ * @see https: //www.npmjs.com/package/express-mysql-session
+ */
+//  export const SessionStore = new ExpSessionStore({
+// 	host                   : Config.host,
+// 	port                   : Config.port,
+// 	user                   : Config.username,
+// 	password               : Config.password,
+// 	database               : Config.database,
+// 	clearExpired           : true,
+// 	checkExpirationInterval: 900000,
+// 	expiration             : 900000
+// });
 
 
 /**
@@ -24,7 +42,7 @@ export const Database = new Sequelize(
 	port:     Config.port,
 	host:     Config.host,      // Name or IP address of MySQL server
 	dialect: 'mysql',           // Tells sequelize that MySQL is used
-	operatorsAliases: false,
+	operatorsAliases: 0,
 	define: {
 		timestamps: false       // Don't create timestamp fields in database
 	},
