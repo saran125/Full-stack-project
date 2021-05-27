@@ -47,9 +47,47 @@ div.blackblock {
 
   <div class="form-group">
     <h5>Song Genres</h5>
-    <input class="field" id="query" type="submit">
-    <br>
-    <!-- {{ field }} {{ field.label }} -->
+		<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="chineseLang" value="Chinese"
+								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
+							<label class="form-check-label" for="chinese">Pop</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="englishLang" value="English"
+								   checked
+								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
+							<label class="form-check-label" for="englishLang">Rock</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="malayLang" value="Malay"
+								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
+							<label class="form-check-label" for="malaylang">Metal</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
+								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
+							<label class="form-check-label" for="tamilLang">Country</label>
+						</div>
+            						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
+								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
+							<label class="form-check-label" for="tamilLang">Rap</label>
+						</div>
+            						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
+								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
+							<label class="form-check-label" for="tamilLang">Electronic</label>
+						</div>
+            						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
+								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
+							<label class="form-check-label" for="tamilLang">Jazz</label>
+						</div>
+            						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
+								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
+							<label class="form-check-label" for="tamilLang">Folk</label>
+						</div>
   </div>
 
   <div class="submit">

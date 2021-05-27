@@ -31,8 +31,8 @@ export class ModelHomeImagePolicy extends Model {
 			"verified"   : { type: DataTypes.BOOLEAN,     allowNull: false, defaultValue: false},
             "homeid"     : { type: DataTypes.STRING(128), allowNull: false  },
             "homepolicy" : { type: DataTypes.STRING(128), allowNull: false },
-            "homeimage" : { type: DataTypes.STRING(128), allowNull: false },
-            "homepolicyimage" : { type: DataTypes.STRING(128), allowNull: false }
+            "homeimage" : { type: DataTypes.STRING(521), allowNull: false },
+            "homepolicyimage" : { type: DataTypes.STRING(521), allowNull: false }
 		}, {
 			"sequelize": database,
 			"modelName": "HomeImagePolicy",

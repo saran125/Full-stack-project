@@ -3,10 +3,10 @@
 <body>
 <h1 class="display-4">Edit Home Policy and Images</h1>
 
-<form method="post" action="templates/edithomedescription" name="">
+<form method="post" action="/edithomeimagepolicy" name="">
   <div class="form-group">
   <h5>Home Image</h5>
-  <input type="homeimage" name="homeimage" class="form-control" value="{{homeimage}}" required>
+  <input type="file" name="homeimage" value="{{homeimage}}" accept="image/png,image/jpeg,image/jpg,image/gif">
   </div>
 
   <h5>Home Policy</h5>
@@ -16,7 +16,7 @@
 
   <h5>Policy Image</h5>
   <div>
-  <input type="policyimage" name="policyimage" class="form-control" value="{{homepolicyimage}}" required>
+  <input type="file" name="policyimage" value="{{homepolicyimage}}" required>
   </div>
   
   <div class="blackblock1">

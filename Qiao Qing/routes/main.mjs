@@ -6,9 +6,45 @@ import { ModelBestReleases } from '../data/homebestreleases.mjs';
 import { ModelRooms } from '../data/rooms.mjs';
 import { ModelMovies } from '../data/movies.mjs';
 import { ModelSongs } from '../data/karaoke.mjs';
+import Passport		  from 'passport';
 
 const router = Router();
 export default router;
+
+/**
+ * @param database {ORM.Sequelize}
+ */
+ export function initialize_models(database) {
+	try {
+		console.log("Intitializing ORM models");
+		//	Initialzie models
+		ModelUser.initialize(database);
+		ModelHomeDescription.initialize(database);
+		ModelHomeImagePolicy.initialize(database);
+		ModelBestReleases.initialize(database);
+		ModelRooms.initialize(database);
+		ModelMovies.initialize(database);
+		ModelSongs.initialize(database);
+
+		console.log("Building ORM model relations and indices");
+		//	Create relations between models or tables
+		//	Setup foreign keys, indexes etc
+	
+		console.log("Adding intitialization hooks");
+		//	Run once hooks during initialization 
+		database.addHook("afterBulkSync", generate_root_account.name,  generate_root_account.bind(this, database));
+		database.addHook("afterBulkSync", generate_homedescription.email, generate_homedescription.bind(this, database));
+		database.addHook("afterBulkSync", generate_homeimagepolicy.email, generate_homeimagepolicy.bind(this, database));
+		database.addHook("afterBulkSync", generate_bestreleases.email,  generate_bestreleases.bind(this, database));
+		database.addHook("afterBulkSync", generate_rooms.email, generate_rooms.bind(this, database));
+		database.addHook("afterBulkSync", generate_movies.email, generate_movies.bind(this, database));
+		database.addHook("afterBulkSync", generate_songs.email, generate_songs.bind(this, database));
+	}
+	catch (error) {
+		console.error ("Failed to configure ORM models");
+		console.error (error);
+	}
+}
 
 // ---------------- 
 //	Serves dynamic files from the dynamic folder
@@ -54,14 +90,31 @@ router.post("/prodlist/createsong"		 ,createsong_process);
 // ---------------- 
 //	TODO:	Common URL paths here
 async function home_page(req, res) {
+	const homedes = await ModelHomeDescription.findOne({
+		where: {
+			"email": "root@mail.com"
+		}
+	});
+	const homeimagepolicy = await ModelHomeImagePolicy.findOne({
+		where: {
+			"email": "root@mail.com"
+		}
+	});
+	const homebestreleases = await ModelBestReleases.findOne({
+		where: {
+			"email": "root@mail.com"
+		}
+	});
 	console.log("Home page accessed");
 	return res.render('home', {
-		homedescription: "Welcome to Golden TV, where we combine the two together to give you the most wonderous experience you seek within safe areas where you can get to enjoy your time with your loved ones!",
-		homepolicy: "Our No Smoking, No Frills policies are to promote healthy and green karaoke culture among",
-		release_name1: "1",
-		release_name2: "2",
-		release_name3: "3",
-		release_name4: "4"
+		homedescription: homedes.homedescription,
+		homepolicy: homeimagepolicy.homepolicy,
+		homeimage: homeimagepolicy.homeimage,
+		homepolicyimage: homeimagepolicy.homepolicyimage,
+		release_name1: "Ending in 2 days!",
+		release_name2: "Coming Soon!",
+		release_name3: "Out Now!",
+		release_name4: "Out Now!"
 	});
 }
 
@@ -84,18 +137,22 @@ async function edithomedescription_page(req, res) {
  */
  async function edithomedescription_process(req, res) {
 	try {
-		const homedes = await ModelHomeDescription.create({
-			"email" : req.body.email,
-			"homeid" : req.body.homeid,
-			"homedescription": req.body.homedescription
+		const homedes = await ModelHomeDescription.findOne({
+			where: {
+				"email": "root@mail.com"
+			}
 		});
+		homedes.update({
+			homedescription: req.body.homedescription
+		});
+		homedes.save();
 		console.log('Description created: $(homedes.email)');
-		return res.redirect("/prodlist", { errors: errors });
+		return res.redirect("/");
 	}	
 	catch (error) {
 		console.error(`Credentials problem: ${req.body.email}`);
 		console.error(error);
-		//return res.render(home_page, { errors: errors });
+		return res.render("/edithomedes", { errors: errors });
 		//return res.redirect(home_page, { errors: errors });
 	}
 }
@@ -108,7 +165,7 @@ async function edithomedescription_page(req, res) {
 // ---------------- 
 //	TODO:	Common URL paths here
 async function edithomeimagepolicy_page(req, res) {
-	console.log("Home Policy page accessed");
+	console.log("Home Policy page accesse d");
 	return res.render('edithomeimagepolicy', {
 		
 	});
@@ -121,19 +178,22 @@ async function edithomeimagepolicy_page(req, res) {
  */
  async function edithomeimagepolicy_process(req, res) {
 try {
-	const homeimagepolicy = await ModelHomeImagePolicy.create({
-		"email"  	: req.body.email,
-		"homeid"	: req.body.homeid,
-		"homepolicy": req.body.homepolicy,
-		"homeimage": req.body.homeimage,
-		"homepolicyimage" : req.body.homepolicyimage
+	const homeimagepolicy = await ModelHomeImagePolicy.findOne({
+		where: {
+			"email": "root@mail.com"
+		}
 	});
+	homeimagepolicy.homepolicy = req.body.homepolicy,
+	homeimagepolicy.homeimage = req.body.homeimage,
+	homeimagepolicy.homepolicyimage = req.body.homepolicyimage
+	homeimagepolicy.save();
 	console.log('Description created: $(homeimagepolicy.email)');
+	return res.redirect("/");
 }		
 	catch (error) {
 		console.error(`Credentials problem: ${req.body.email}`);
 		console.error(error);
-		return res.render('home', { errors: errors });
+		return res.render('/edithomeimagepolicy', { errors: errors });
 	}
 }
 
@@ -158,7 +218,7 @@ async function edithomebestreleases_page(req, res) {
  */
  async function edithomebestreleases_process(req, res) {
 	try {
-		const  homebestreleases = await  ModelBestReleases.create({
+		const homebestreleases = await ModelBestReleases.create({
 			"email"  	: req.body.email,
 			"homeid"	: req.body.homeid,
 			"release_image1" : req.body.release_image1,
@@ -175,7 +235,7 @@ async function edithomebestreleases_page(req, res) {
 		catch (error) {
 			console.error(`Credentials problem: ${req.body.email}`);
 			console.error(error);
-			return res.render('home', { errors: errors });
+			return res.render('/edithomeimagepolicy', { errors: errors });
 		}
 	}
 
@@ -187,9 +247,61 @@ async function edithomebestreleases_page(req, res) {
 // ---------------- 
 //	TODO:	Common URL paths here
 	async function prodlist_page(req, res) {
-		console.log("Product List page accessed");
-		return res.render('prodlist');
-	};
+		const roomlist = await ModelRooms.findOne({
+			where: {
+				"email": "root@mail.com"
+			}
+		});
+		const createmovies = await ModelMovies.findOne({
+			where: {
+				"email": "root@mail.com"
+			}
+		});
+		const createsongs = await ModelSongs.findOne({
+			where: {
+				"email": "root@mail.com"
+			}
+		});
+	console.log('Prodlist Page accessed');
+	return res.render('prodlist', {
+		"room_title" 		: "Rooms Pricing!",
+		"small_roominfo" 	: "Small Room – Up to 2 PAX",
+		"small_roomprice" 	: "20",
+		"small_roomimage1" 	: req.body.small_roomimage1,
+		"small_roomimage2" 	: req.body.small_roomimage2,
+		"med_roominfo" 		: "Medium Room – Up to 4 PAX",
+		"med_roomprice" 	: "26",
+		"med_roomimage" 	: req.body.med_roomimage,
+		"large_roominfo" 	: "Large Room – Up to 6 PAX",
+		"large_roomprice" 	: "32",
+		"large_roomimage1"	: req.body.large_roomimage1,
+		"large_roomimage2"	: req.body.large_roomimage2,
+		"movieimage" 		: req.body.movieimage,
+		"moviename" 		: "moviename",
+		"movieagerating"	: "movieagerating",
+		"movieduration" 	: "movieduration",
+		"movieHorror" 		: req.body.movieHorror,
+		"movieComedy" 		: req.body.movieComedy,
+		"movieScience" 		: req.body.movieScience,
+		"movieRomance" 		: req.body.movieRomance,
+		"movieAnimation"	: req.body.movieAnimation,
+		"movieAdventure"	: req.body.movieAdventure,
+		"movieEmotional"	: req.body.movieEmotional,
+		"movieMystery" 		: req.body.movieMystery,
+		"movieAction" 		: req.body.movieAction,
+		"songimage" 		: req.body.songimage,
+		"songname" 			: "songname",
+		"songagerating"		: "songagerating",
+		"songduration" 		: "songduration",
+		"songPop" 			: req.body.songPop,
+		"songRock" 			: req.body.songRock,
+		"songMetal" 		: req.body.songMetal,
+		"songCountry" 		: req.body.songCountry,
+		"songRap"			: req.body.songRap,
+		"songJazz"			: req.body.songJazz,
+		"songFolk" 			: req.body.songFolk
+	});	
+}
 
 /**
  * Renders the edithomebestreleases page

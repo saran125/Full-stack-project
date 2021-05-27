@@ -1,9 +1,10 @@
+<title>Movie/Karaoke Selection</title>
 <link rel="stylesheet" type="text/css" href="public/css/prodlist.css" media="screen"/>
 <div class="RoomsPricing">
 
 <h2>{{ roomtitle }}</h2>
 
-<form action="../edithomedes">
+<form action="../prodlist/editroominfo">
 <input type="submit" value="Edit" class="btn btn-outline-warning">
 </form>
 
@@ -14,10 +15,10 @@
     </div>
     <div class="w3-container w3-white">
 		<img style="width: 110px; height: 160px; padding-bottom: 5px;" 
-        src="/public/img/newpicforhomepage.png"
+        src="/public/img/Small-room-1-1.jpg"
          alt="Norway" class="w3-hover-opacity">
         <img style="width: 110px; height: 160px; padding-bottom: 5px;" 
-        src="/public/img/newpicforhomepage.png"
+        src="/public/img/Teo-Heng-KTV-Outlet-ssc-12 (1).jpg"
          alt="Norway" class="w3-hover-opacity">
     </div>
 </div>
@@ -28,7 +29,7 @@
     </div>
     <div class="w3-container w3-white">
 		<img style="width: 220px; height: 205px; padding-bottom: 25px;" 
-        src="/public/img/newpicforhomepage.png"
+        src="/public/img/Medium-room-1.jpg"
          alt="Norway" class="w3-hover-opacity">
     </div>
 </div>
@@ -39,10 +40,10 @@
     </div>
     <div class="w3-container w3-white">
 		<img style="width: 110px; height: 160px; padding-bottom: 5px;" 
-        src="/public/img/newpicforhomepage.png"
+        src="/public/img/Teo-Heng-KTV-Outlet-ssc-09.jpg"
          alt="Norway" class="w3-hover-opacity">
         <img style="width: 110px; height: 160px; padding-bottom: 5px;" 
-        src="/public/img/newpicforhomepage.png"
+        src="/public/img/Teo-Heng-KTV-Outlet-ssc-10.jpg"
          alt="Norway" class="w3-hover-opacity">
     </div>
 </div>
@@ -57,11 +58,13 @@
 <div class="List">
 </div>
 
+<form action="../prodlist/chooseeditmoviesandsongs">
 <input type="submit" value="Edit" class="btn btn-outline-warning">
+</form>
 
 <div class="List">
     <div class="w3-container w3-white1">
-        <img src="/public/img/newpicforhomepage.png" alt="Norway" class="w3-hover-opacity">
+        <img src="/public/img/moviewatch.png" alt="Norway" class="w3-hover-opacity">
     </div>
     <div class="w3-container w3-white2">
         <div class="Title">
@@ -71,35 +74,39 @@
         <div class="MoviesAdded">
             <div class="MovieAdd1">
                 <img style="width: 75px; height: 100px;" 
-                src="/public/img/newpicforhomepage.png"
+                src="/public/img/img3722.webp"
                 alt="Norway" class="w3-hover-opacity">
                 <div class="GenreTags1">
                     <div class="MovieTag"> Horror </div>
                 </div>
-                <div class="MovieName">{{ movieadded1 }} </div> 
+                <div class="MovieName">{{ moviename }} </div>
+                <div class="MovieRating">{{ movieagerating }}</div>  
+                <div class="MovieDuration">{{ movieduration }}</div>
             </div>
 
             <div class="MovieAdd2">
                 <img style="width: 75px; height: 100px;" 
-                src="/public/img/newpicforhomepage.png"
+                src="/public/img/img3725.webp"
                 alt="Norway" class="w3-hover-opacity">
                 <div class="GenreTags2">
                     <div class="MovieTag"> Comedy </div>
                     <div class="MovieTag"> Animation </div>
                 </div>
-                <div class="MovieName">{{ movieadded1 }} </div>  
+                <div class="MovieName">{{ moviename }} </div>
+                <div class="MovieRating">{{ movieagerating }}</div>  
+                <div class="MovieDuration">{{ movieduration }}</div>  
             </div>
         </div>
 
         <p><a href="/retrieveReview/{{ userid }}"><button class="Review1"> Review! </button></a></p>
-        <p><a href="/Purchase/{{ userid }}/{{movie_id}}"><button class="purchase"> Buy Now! </button></a></p>
+        <p><a href="/Purchase/{{ userid }}/{{movie_id}}"><button class="purchase"> Book Now! </button></a></p>
     </div>
     
 </div>
 
 <div class="List">
     <div class="w3-container w3-white1">
-        <img src="/public/img/newpicforhomepage.png" alt="Norway" class="w3-hover-opacity">
+        <img src="/public/img/karaokesing.png" alt="Norway" class="w3-hover-opacity">
     </div>
     <div class="w3-container w3-white2">
         <div class="Title">
@@ -108,26 +115,30 @@
         <div class="SongsAdded">
             <div class="SongAdd1">
                 <img style="width: 75px; height: 100px;" 
-                src="/public/img/newpicforhomepage.png"
+                src="/public/img/orangealbum.jpg"
                 alt="Norway" class="w3-hover-opacity">
                 <div class="GenreTags1">
                     <div class="SongTag"> Pop </div>
                 </div>
-                <div class="SongName">{{ songadded1 }} </div> 
+                <div class="SongName">{{ songname }} </div>
+                <div class="SongRating">{{ songagerating }}</div>  
+                <div class="SongDuration">{{ songduration }}</div> 
             </div>
 
             <div class="SongAdd2">
                 <img style="width: 75px; height: 100px;" 
-                src="/public/img/newpicforhomepage.png"
+                src="/public/img//XXXV.jpg"
                 alt="Norway" class="w3-hover-opacity">
                 <div class="GenreTags2">
                     <div class="SongTag"> Rock </div>
                     <div class="SongTag"> Rap </div>
                 </div>
-                <div class="SongName">{{ songadded2 }} </div>  
+                <div class="SongName">{{ songname }} </div>
+                <div class="SongRating">{{ songagerating }}</div>  
+                <div class="SongDuration">{{ songduration }}</div>   
             </div>
         </div>
         <p><a href="/retrieveReview/{{ userid }}"><button class="Review1"> Review! </button></a></p>
-        <p><a href="/Purchase/{{ userid }}/{{movie_id}}"><button class="purchase"> Buy Now! </button></a></p>
+        <p><a href="/Purchase/{{ userid }}/{{movie_id}}"><button class="purchase"> Book Now! </button></a></p>
     </div>
 </div>

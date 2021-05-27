@@ -30,7 +30,11 @@ export class ModelHomeDescription extends Model {
 			"role"       : { type: DataTypes.ENUM(UserRole.User, UserRole.Admin), defaultValue: UserRole.User, allowNull: false },
 			"verified"   : { type: DataTypes.BOOLEAN,     allowNull: false, defaultValue: false},
             "homeid"     : { type: DataTypes.STRING(128), allowNull: false },     
-            "homedescription" : { type: DataTypes.STRING(650), allowNull: false }
+            "homedescription" : { type: DataTypes.STRING(650), allowNull: false,
+									set(value){ 
+										this.setDataValue('homedescription', value);
+									} 
+								}
 		}, {
 			"sequelize": database,
 			"modelName": "HomeDescription",
@@ -54,5 +58,5 @@ export class ModelHomeDescription extends Model {
 
     get email() { return this.getDataValue("email"); }
 	get homeid() { return this.getDataValue("homeid"); }
-	get homedescription() { return this.getDataValue("homedescription"); }  
+	get homedescription() { return this.getDataValue("homedescription"); }
 }

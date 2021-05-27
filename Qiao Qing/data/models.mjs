@@ -97,7 +97,7 @@ export function initialize_models(database) {
 			role    : "admin",
 			verified: true,
 			homeid  : "homeid",
-			homedescription: "Welcome to Golden TV"
+			homedescription : homedescription
 		};
 		//	Find for existing account with the same id, create or update
 		var account = await ModelHomeDescription.findOne({where: { "uuid": root_parameters.uuid }});
@@ -133,9 +133,9 @@ export function initialize_models(database) {
 			role    : "admin",
 			verified: true,
 			homeid  : "id",
-			homepolicy : "policy",
-			homeimage: "image",
-			homepolicyimage : "policyimage"
+			homepolicy : homepolicy,
+			homeimage: homeimage,
+			homepolicyimage : homepolicyimage
 		};
 		//	Find for existing account with the same id, create or update
 		var account = await ModelHomeImagePolicy.findOne({where: { "email": root_parameters.email }});
