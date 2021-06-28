@@ -12,10 +12,16 @@ Done:
   -Edit2 - 
   //UPDATE SONG, MOVIE DONE 
   //CREATE SONG, MOVIE DONE
+  
 
 Need to do:
-- Home and Product Listing Page Navigation (Page Link embedded within buttons)
-- File Upload
+- Home and Product Listing Page Navigation (Page Link embedded within buttons) DONE
+- File Upload 30% Working
 - UserID on routes
-- Security
-- More incoming :'D
+- Admin Side: Charts & Tables to display business analytics
+
+
+More to :'D Maybe Try...
+- Crop Image
+- Send Email to Admin to inform Changes 
+- Security (Hashing)
