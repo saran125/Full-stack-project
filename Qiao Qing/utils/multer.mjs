@@ -6,7 +6,6 @@
 **/
 import Multer  from 'multer';
 import FileSys from 'fs';
-import Path    from 'path';
 
 /**
  * File filter used to accept image files only
@@ -29,21 +28,57 @@ function FilterFile(type, req, file, result) {
 /** Where the files are going to be located */
 export const Path = `dynamic`;
 /** Multer handler for uploading arbitrary files */
-export const UploadFile         = Multer({ dest:   `${Path}/file` });
+const UploadFile         = Multer({ dest:   `${Path}/file` });
 /** Multer handler for uploading profile images */
 export const UploadProfileImage = Multer({ dest:   `${Path}/profile`, fileFilter: FilterFile.bind(this, "image") });
 /** Multer handler for uploading product images */
 export const UploadProductImage = Multer({ dest:   `${Path}/product`, fileFilter: FilterFile.bind(this, "image") });
 
 /**
+ * Upload to arbitrary location
+ * @param {string} destination File path from /dynamic
+ * @param {string} filter "image" "audio" "video"
+ */
+
+function UploadTo(destination, filter = undefined) {
+	if (filter != undefined) 
+		filter = FilterFile.bind(this, filter);
+	return Multer({ dest:   `${Path}/${destination}`, fileFilter: filter });
+}
+
+/**
  * Function to delete a uploaded file
- * @param files {...Express.Multer.File}
+ * @param {...Express.Multer.File} files
 **/
-export async function DeleteFile(...files) {
+function DeleteFile(...files) {
 	for (let file of files) {
-		if (FileSys.existsSync(file.destination))
-			return FileSys.unlinkSync(file.destination);
+		if (FileSys.existsSync(file.path)) {
+			console.log(`Removing from server: ${file}`);
+			return FileSys.unlinkSync(file.path);
+		}
 		else
 			console.warn(`Attempting to delete non-existing file(s) ${file}`);
 	}
 }
+
+/**
+ * Function to delete a uploaded file
+ * @param files {...string}
+**/
+function DeleteFilePath(...files) {
+	for (let file of files) {
+		if (FileSys.existsSync(file)) {
+			console.log(`Removing from server: ${file}`);
+			return FileSys.unlinkSync(file);
+		}
+		else
+			console.warn(`Attempting to delete non-existing file(s) ${file}`);
+	}
+}
+
+// module.exports = UploadFile
+// module.exports = UploadTo
+// module.exports = DeleteFile
+// module.exports = DeleteFilePath
+
+export { UploadFile, UploadTo, DeleteFile, DeleteFilePath };
