@@ -9,9 +9,9 @@ import {initialize_models } from './models.mjs';
  * Database configuration
  */
 const Config = {
-	database: 'goldencinema',
+	database: 'goldentv',
 	username: 'root',
-	password: 'nigelleeck2003',
+	password: 'password',
 	host    : 'localhost',
 	port    : 3306
 };
