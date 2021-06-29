@@ -38,8 +38,8 @@ Server.use("/public", Express.static('public'));
 /**
  * Form body parsers etc
  */
-Server.use(BodyParser.urlencoded( { extended: false }));
-Server.use(BodyParser.json());
+Server.use(Express.urlencoded( { extended: false }));
+Server.use(Express.json());
 Server.use(CookieParser());
 Server.use(MethodOverrides('_method'));
 
