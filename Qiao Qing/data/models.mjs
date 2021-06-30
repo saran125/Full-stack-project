@@ -97,7 +97,7 @@ export function initialize_models(database) {
 			role    : "admin",
 			verified: true,
 			homeid  : "homeid",
-			homedescription : homedescription
+			homedescription : generate_homedescription.homedescription
 		};
 		//	Find for existing account with the same id, create or update
 		var account = await ModelHomeDescription.findOne({where: { "uuid": root_parameters.uuid }});
@@ -133,9 +133,9 @@ export function initialize_models(database) {
 			role    : "admin",
 			verified: true,
 			homeid  : "id",
-			homepolicy : homepolicy,
-			homeimage: homeimage,
-			homepolicyimage : homepolicyimage
+			homepolicy : generate_homeimagepolicy.homepolicy,
+			homeimage: generate_homeimagepolicy.homeimage,
+			homepolicyimage : generate_homeimagepolicy.homepolicyimage
 		};
 		//	Find for existing account with the same id, create or update
 		var account = await ModelHomeImagePolicy.findOne({where: { "email": root_parameters.email }});
@@ -214,20 +214,20 @@ export function initialize_models(database) {
 			role    		: "admin",
 			verified		: true,
             prodlistid		: "prodlistid",
-            room_title 		: "room_title",
-            small_roominfo 	: "small_roominfo",
-            small_roomprice : "small_roomprice",
-            small_roomimage1: "small_roomimage1",
-            small_roomimage2: "small_roomimage2",
+            room_title 		: generate_rooms.room_title,
+            small_roominfo 	: generate_rooms.small_roominfo,
+            small_roomprice : generate_rooms.small_roomprice,
+            small_roomimage1: generate_rooms.small_roomimage1,
+            small_roomimage2: generate_rooms.small_roomimage2,
 
-            med_roominfo 	:  "med_roominfo",
-            med_roomprice 	: "med_roomprice",
-            med_roomimage 	: "med_roomimage",
+            med_roominfo 	: generate_rooms.med_roominfo,
+            med_roomprice 	: generate_rooms.med_roomprice,
+            med_roomimage 	: generate_rooms.med_roomimage,
 
-            large_roominfo 	: "large_roominfo",
-            large_roomprice : "large_roomprice",
-            large_roomimage1: "large_roomimage1",
-            large_roomimage2: "large_roomimage2"
+            large_roominfo 	: generate_rooms.large_roominfo,
+            large_roomprice : generate_rooms.large_roomprice,
+            large_roomimage1: generate_rooms.large_roomimage1,
+            large_roomimage2: generate_rooms.large_roomimage2
 		};
 		//	Find for existing account with the same id, create or update
 		var account = await ModelRooms.findOne({where: { "email": root_parameters.email }});
