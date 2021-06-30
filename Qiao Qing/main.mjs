@@ -275,7 +275,7 @@ async function edithomeimagepolicy_process(req, res, next) {
 			role: "admin",
 			verified: true,
 			homeid: "id",
-			homepolicy: req.file.homepolicy,
+			homepolicy: req.body.homepolicy,
 			homeimage: homeimageFile.filename,
 			homepolicyimage: homepolicyimageFile.filename
 		});
