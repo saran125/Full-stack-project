@@ -1,3 +1,47 @@
+// /**
+//  * This utility file contains pre-determined areas of files where you wanted to upload to.
+//  * However, you need to understand that using Multer module, it doesn't help you do clean up
+//  * in the event that your form validation is wrong. So do remember to delete the uploaded file
+//  * if an error occurred or bad request.
+// **/
+// import multer from 'multer';
+// import fs from 'fs';
+// import path from 'path';
+
+// var storage = multer.diskStorage({
+// 	destination: (req, file, callback) => {
+// 		callback(null, './public/uploads/');
+// 	},
+// 	filename: (req, file, callback) => {
+// 		callback(null, file.originalname);
+// 	}
+// });
+
+// // this code goes inside the object passed to multer()
+// function fileFilter (req, file, cb) {    
+// 	// Allowed ext
+// 	 const filetypes = /jpeg|jpg|png|gif/;
+  
+//    // Check ext
+// 	const extname =  filetypes.test(path.extname(file.originalname).toLowerCase());
+//    // Check mime
+//    const mimetype = filetypes.test(file.mimetype);
+  
+//    if(mimetype && extname){
+// 	   return cb(null,true);
+//    } else {
+// 	   cb('Error: Images Only!');
+//    }
+//   }
+
+// const upload = multer({ 
+// 	storage: storage,
+// 	limits : {fileSize : 1000000},
+// 	fileFilter : fileFilter
+// });
+
+// export default upload;
+
 /**
  * This utility file contains pre-determined areas of files where you wanted to upload to.
  * However, you need to understand that using Multer module, it doesn't help you do clean up
