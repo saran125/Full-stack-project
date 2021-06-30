@@ -1,6 +1,8 @@
 import ORM from 'sequelize'
 const { Sequelize, DataTypes, Model } = ORM;
 
+import { DeleteFilePath } from '../routes/main.mjs';
+
 /**
  * For enumeration use
 **/
@@ -30,9 +32,21 @@ export class ModelHomeImagePolicy extends Model {
 			"role"       : { type: DataTypes.ENUM(UserRole.User, UserRole.Admin), defaultValue: UserRole.User, allowNull: false },
 			"verified"   : { type: DataTypes.BOOLEAN,     allowNull: false, defaultValue: false},
             "homeid"     : { type: DataTypes.STRING(128), allowNull: false  },
-            "homepolicy" : { type: DataTypes.STRING(128), allowNull: false },
-            "homeimage" : { type: DataTypes.STRING(521), allowNull: false },
-            "homepolicyimage" : { type: DataTypes.STRING(521), allowNull: false }
+            "homepolicy" : { type: DataTypes.STRING(128), allowNull: false ,
+					set(value){ 
+						this.setDataValue('homepolicy', value);
+					} 
+				},
+            "homeimage" : { type: DataTypes.STRING(4096), allowNull: false, defaultValue: "" ,
+				set(value){ 
+					this.setDataValue('homeimage', value);
+				} 
+			},
+            "homepolicyimage" : { type: DataTypes.STRING(4096), allowNull: false, defaultValue: "" ,
+				set(value){ 
+					this.setDataValue('homepolicyimage', value);
+				} 
+			}
 		}, {
 			"sequelize": database,
 			"modelName": "HomeImagePolicy",
@@ -54,9 +68,19 @@ export class ModelHomeImagePolicy extends Model {
 		instance.dateUpdated = Sequelize.literal('CURRENT_TIMESTAMP');
 	}
 
+	/**
+	 * Deletes the profile data and its image
+	 */
+	 destroy() {
+		if (this.resImgUrl.length > 0) {
+			DeleteFilePath(`${process.cwd()}/${this.resImgUrl}`);
+		}
+		super.destroy();
+	}
+
     get email() { return this.getDataValue("email"); }
-	get homeid() { return this.getDataValue("homeid"); }    
-	get homepolicy() { return this.getDataValue("homepolicy"); }
-    get homeimage() { return this.getDataValue("homeimage"); }  
-    get homepolicyimage() { return this.getDataValue("homepolicyimage"); }  
+    get homeid() { return this.getDataValue("homeid"); }    
+    get homepolicy() { return this.getDataValue("homepolicy"); }
+    get homeimage() { return String (this.getDataValue("homeimage")); }  
+    get homepolicyimage() { return String(this.getDataValue("homepolicyimage")); }  
 }
