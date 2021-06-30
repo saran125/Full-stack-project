@@ -16,7 +16,7 @@ Done:
 
 Need to do:
 - Home and Product Listing Page Navigation (Page Link embedded within buttons) DONE
-- File Upload 30% Working
+- File Upload 50% Change to Update and Include for all models
 - UserID on routes
 - Admin Side: Charts & Tables to display business analytics
 
