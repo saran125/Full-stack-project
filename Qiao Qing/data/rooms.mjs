@@ -30,20 +30,66 @@ export class ModelRooms extends Model {
 			"verified"   : { type: DataTypes.BOOLEAN,     allowNull: false, defaultValue: false},
             "prodlistid"     : { type: DataTypes.STRING(128) },
 
-            "room_title" : { type: DataTypes.STRING(650), allowNull: false },
-            "small_roominfo" : { type: DataTypes.STRING(650), allowNull: false },
-            "small_roomprice" : { type: DataTypes.STRING(650), allowNull: false },
-            "small_roomimage1" : { type: DataTypes.STRING(650), allowNull: false },
-            "small_roomimage2" : { type: DataTypes.STRING(650), allowNull: false },
-
-            "med_roominfo" : { type: DataTypes.STRING(650), allowNull: false },
-            "med_roomprice" : { type: DataTypes.STRING(650), allowNull: false },
-            "med_roomimage" : { type: DataTypes.STRING(650), allowNull: false },
-
-            "large_roominfo" : { type: DataTypes.STRING(650), allowNull: false },
-            "large_roomprice" : { type: DataTypes.STRING(650), allowNull: false },
-            "large_roomimage1" : { type: DataTypes.STRING(650), allowNull: false },
-            "large_roomimage2" : { type: DataTypes.STRING(650), allowNull: false }
+            "room_title" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('room_title', value);
+				}
+			},
+            "small_roominfo" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('small_roominfo', value);
+				}
+			},
+            "small_roomprice" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('small_roomprice', value);
+				}
+			},
+            "small_roomimage1" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('small_roomimage1', value);
+				}
+			},
+            "small_roomimage2" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('small_roomimage2', value);
+				}
+			},
+            "med_roominfo" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('med_roominfo', value);
+				}
+			},
+            "med_roomprice" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('med_roomprice', value);
+				}
+			},
+            "med_roomimage" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('med_roomimage', value);
+				}
+			},
+            "large_roominfo" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('large_roominfo', value);
+				}
+			},
+            "large_roomprice" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('large_roomprice', value);
+				}
+			},
+            "large_roomimage1" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('large_roomimage1', value);
+				}
+			},
+            "large_roomimage2" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('large_roomimage2', value);
+				}
+			},
 		}, {
 			"sequelize": database,
 			"modelName": "Rooms",
@@ -67,18 +113,18 @@ export class ModelRooms extends Model {
 
     get email() { return this.getDataValue("email"); }
     get prodlistid() { return this.getDataValue("prodlistid"); }
-	get room_title() { return this.getDataValue("room_title"); }
-	get small_roominfo() { return this.getDataValue("small_roominfo"); }  
-	get small_roomprice() { return this.getDataValue("small_roomprice"); }  
-	get small_roomimage1() { return this.getDataValue("small_roomimage1"); }  
-	get small_roomimage2() { return this.getDataValue("small_roomimage2"); }  
+	get room_title() { return String (this.getDataValue("room_title")); }
+	get small_roominfo() { return String (this.getDataValue("small_roominfo")); }  
+	get small_roomprice() { return String (this.getDataValue("small_roomprice")); }  
+	get small_roomimage1() { return String (this.getDataValue("small_roomimage1")); }  
+	get small_roomimage2() { return String (this.getDataValue("small_roomimage2")); }  
 
-	get med_roominfo() { return this.getDataValue("med_roominfo"); }
-	get med_roomprice() { return this.getDataValue("med_roomprice"); }  
-	get med_roomimage() { return this.getDataValue("med_roomimage"); }
+	get med_roominfo() { return String (this.getDataValue("med_roominfo")); }
+	get med_roomprice() { return String (this.getDataValue("med_roomprice")); }  
+	get med_roomimage() { return String (this.getDataValue("med_roomimage")); }
 
-	get large_roominfo() { return this.getDataValue("large_roominfo"); }  
-	get large_roomprice() { return this.getDataValue("large_roomprice"); }  
-	get large_roomimage1() { return this.getDataValue("large_roomimage1"); }  
-	get large_roomimage2() { return this.getDataValue("large_roomimage2"); } 
+	get large_roominfo() { return String (this.getDataValue("large_roominfo")); }  
+	get large_roomprice() { return String (this.getDataValue("large_roomprice")); }  
+	get large_roomimage1() { return String (this.getDataValue("large_roomimage1")); }  
+	get large_roomimage2() { return String (this.getDataValue("large_roomimage2")); } 
 }
