@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { flashMessage } from '../utils/flashmsg.mjs'
-import { UploadFile, UploadTo, DeleteFile, DeleteFilePath } from '../utils/multer.mjs';
+// import { upload } from '../utils/multer.mjs'
+// import { UploadFile, UploadTo, DeleteFile, DeleteFilePath } from '../utils/multer.mjs';
 // import axios from 'axios';
 import { ModelHomeDescription } from '../data/homedescription.mjs';
 import { ModelHomeImagePolicy } from '../data/homeimagepolicy.mjs';
@@ -8,8 +9,14 @@ import { ModelBestReleases } from '../data/homebestreleases.mjs';
 import { ModelRooms } from '../data/rooms.mjs';
 import { ModelMovies } from '../data/movies.mjs';
 import { ModelSongs } from '../data/karaoke.mjs';
-import Passport from 'passport';
+// import Passport from 'passport';
 import path from 'path';
+import multer from 'multer';
+import fs from 'fs';
+import express from 'express';
+import bodyParser from 'body-parser';
+import exphbs from 'express-handlebars';
+import methodOverride from 'method-override';
 
 const router = Router();
 export default router;
@@ -62,6 +69,15 @@ export function initialize_models(database) {
 import RouterAuth from './auth.mjs'
 router.use("/auth", RouterAuth);
 
+// // Body parser middleware to parse HTTP body to read post data
+// router.use(bodyParser.urlencoded({extended: false}));
+// router.use(bodyParser.json());
+
+// Creates static folder for publicly accessible HTML, CSS and Javascript files
+router.use(express.static(path.join(process.cwd(), 'public')));
+
+router.use(methodOverride('_method'));
+
 router.get("/", home_page);
 // '/edit/:id'
 router.get("/edithomedes", edithomedescription_page);
@@ -69,16 +85,66 @@ router.post("/edithomedes", edithomedescription_process);
 
 router.get("/edithomeimagepolicy", edithomeimagepolicy_page);
 
-router.post("/edithomeimagepolicy", 
-// UploadTo("edithomeimagepolicy").fields([
-//     { name: 'homepolicy', maxCount: 1 },
-//     { name: 'homepolicyimage', maxCount: 1 },
-//   ]), 
+var storage = multer.diskStorage({
+	destination: (req, file, callback) => {
+		callback(null, './public/uploads/');
+	},
+	filename: (req, file, callback) => {
+		callback(null, file.originalname);
+	}
+});
+
+// this code goes inside the object passed to multer()
+function fileFilter (req, file, cb) {    
+	// Allowed ext
+	 const filetypes = /jpeg|jpg|png|gif/;
+    // Check ext
+	const extname =  filetypes.test(path.extname(file.originalname).toLowerCase());
+    // Check mime
+    const mimetype = filetypes.test(file.mimetype);
+  
+   if(mimetype && extname){
+	   return cb(null,true);
+   } else {
+	   cb('Error: Images Only!');
+   }
+  }
+
+const upload = multer({ 
+	storage: storage,
+	limits : {fileSize : 1000000},
+	fileFilter : fileFilter
+});
+
+/**
+ * Function to delete a uploaded file
+ * @param files {...string}
+**/
+export function DeleteFilePath(...files) {
+	for (let file of files) {
+		if (FileSys.existsSync(file)) {
+			console.log(`Removing from server: ${file}`);
+			return FileSys.unlinkSync(file);
+		}
+		else
+			console.warn(`Attempting to delete non-existing file(s) ${file}`);
+	}
+}
+
+// const uploadMultiple = upload.fields([
+// 	    { name: 'homeimage', maxCount: 1 },
+// 	    { name: 'homepolicyimage', maxCount: 1 },
+// 	  ])
+
+router.post("/edithomeimagepolicy",
+upload.fields([
+    { name: 'homeimage', maxCount: 1 },
+    { name: 'homepolicyimage', maxCount: 1 },
+  ]), 
 edithomeimagepolicy_process);
 
 router.get("/edithomebestreleases", edithomebestreleases_page);
 router.post("/edithomebestreleases", edithomebestreleases_process);
-
 
 router.get("/prodlist", prodlist_page);
 router.get("/prodlist/editroominfo", editrooms_page);
@@ -104,6 +170,7 @@ router.get("/businessstatistics", businessstatistics_page);
 // ---------------- 
 //	TODO:	Common URL paths here
 async function home_page(req, res) {
+	// res.sendFile("dynamic/uploads/{{ }}");
 	const homedes = await ModelHomeDescription.findOne({
 		where: {
 			"email": "root@mail.com"
@@ -178,7 +245,7 @@ async function edithomedescription_process(req, res) {
  */
 // ---------------- 
 //	TODO:	Common URL paths here
-async function edithomeimagepolicy_page(req, res) {
+async function edithomeimagepolicy_page(req, res, next) {
 	console.log("Home Policy page accessed");
 	return res.render('edithomeimagepolicy', {
 
@@ -190,51 +257,41 @@ async function edithomeimagepolicy_page(req, res) {
  * @param {Request}  req Express Request handle
  * @param {Response} res Express Response handle
  */
-async function edithomeimagepolicy_process(req, res) {
-	const Uploader = UploadTo("uploads").fields([
-		{ name: "homeimage", maxCount: 1 },
-		{ name: "homepolicyimage", maxCount: 1 },
-	]);
-	return Uploader(req, res, async function (error_upload) {
-		if (error_upload) {
-			console.error(`An error has occurred during the uploading of file`);
-			console.error(error_upload);
-		}
-		else {
-			try {
-				// const homeimage = req.files.homeimage[0].path;
-				const homeimage = req.files.homeimage[0].path;
-				console.log(homeimage);
-				const homepolicyimage = req.files.homepolicyimage[0].path;
-				const homeimagepolicy = await ModelHomeImagePolicy.create({
-					uuid: "00000000-0000-0000-0000-000000000000",
-					email: "root@mail.com",
-					role: "admin",
-					verified: true,
-					homeid: "id",
-					homepolicy: req.body.homepolicy,
-					homeimage: homeimage,
-					homepolicyimage: homepolicyimage
-				});
-				homeimagepolicy.save();
-				// res.send(homeimage);
-				// res.send(homepolicyimage);
-				console.log('Description created: $(homeimagepolicy.email)');
-				return res.redirect("/");
-			}
-		catch (error) {
-			console.error(`File is uploaded but something crashed`);
-			console.error(error);
-			console.error("Removing uploaded file");
-			DeleteFile(req.files);
-			return res.render('edithomeimagepolicy', { 
-				homeimage: `dynamic/uploads/${req.file.homeimage}`,
-				homepolicyimage: `dynamic/uploads/${req.file.homepolicyimage}` 
-			});
-		}
-		atob
+async function edithomeimagepolicy_process(req, res, next) {
+	try {
+		const file = req.file;
+		//console.log(homeimage);
+		// if (!file) {
+		// 	const error = new Error("Please upload a file");
+		// 	error.httpStatusCode = 400;
+		// 	return next(error);
+		//   }
+
+		const homeimageFile = req.files.homeimage[0];
+  		const homepolicyimageFile = req.files.homepolicyimage[0];
+		const homeimagepolicy = await ModelHomeImagePolicy.create({
+			uuid: "00000000-0000-0000-0000-000000000000",
+			email: "root@mail.com",
+			role: "admin",
+			verified: true,
+			homeid: "id",
+			homepolicy: req.file.homepolicy,
+			homeimage: homeimageFile.filename,
+			homepolicyimage: homepolicyimageFile.filename
+		});
+		homeimagepolicy.save();
+		// res.send(homeimagepath);
+		// res.send(homepolicyimagepath);
+		console.log('Description created: $(homeimagepolicy.email)');
+		return res.redirect("/");
 	}
-	});
+	catch (error) {
+		console.error(`File is uploaded but something crashed`);
+		console.error(error);
+		return res.render('edithomeimagepolicy', { 
+			hey: "Wrong Type of File."
+		});
+	}
 }
 
 /**
