@@ -147,8 +147,17 @@ router.get("/edithomebestreleases", edithomebestreleases_page);
 router.post("/edithomebestreleases", edithomebestreleases_process);
 
 router.get("/prodlist", prodlist_page);
+
 router.get("/prodlist/editroominfo", editrooms_page);
-router.post("/prodlist/editroominfo", editrooms_process);
+router.post("/prodlist/editroominfo", 
+upload.fields([
+    { name: 'small_roomimage1', maxCount: 1 },
+    { name: 'small_roomimage2', maxCount: 1 },
+	{ name: 'med_roomimage', maxCount: 1 },
+    { name: 'large_roomimage1', maxCount: 1 },
+    { name: 'large_roomimage2', maxCount: 1 }	
+  ]),
+editrooms_process);
 
 router.get("/prodlist/chooseeditmoviesandsongs", chooseeditmoviesandsongs_page);
 
@@ -269,12 +278,14 @@ async function edithomeimagepolicy_process(req, res, next) {
 
 		const homeimageFile = req.files.homeimage[0];
   		const homepolicyimageFile = req.files.homepolicyimage[0];
-		const homeimagepolicy = await ModelHomeImagePolicy.create({
-			uuid: "00000000-0000-0000-0000-000000000000",
-			email: "root@mail.com",
-			role: "admin",
-			verified: true,
-			homeid: "id",
+		
+		const homeimagepolicy = await ModelHomeImagePolicy.findOne({
+			where: {
+				"email": "root@mail.com"
+			}
+		});
+		homeimagepolicy.update({
+			// req.body.homepolicy
 			homepolicy: req.body.homepolicy,
 			homeimage: homeimageFile.filename,
 			homepolicyimage: homepolicyimageFile.filename
@@ -361,42 +372,42 @@ async function prodlist_page(req, res) {
 	});
 	console.log('Prodlist Page accessed');
 	return res.render('prodlist', {
-		"room_title": "Rooms Pricing!",
-		"small_roominfo": "Small Room – Up to 2 PAX",
-		"small_roomprice": "20",
-		"small_roomimage1": req.body.small_roomimage1,
-		"small_roomimage2": req.body.small_roomimage2,
-		"med_roominfo": "Medium Room – Up to 4 PAX",
-		"med_roomprice": "26",
-		"med_roomimage": req.body.med_roomimage,
-		"large_roominfo": "Large Room – Up to 6 PAX",
-		"large_roomprice": "32",
-		"large_roomimage1": req.body.large_roomimage1,
-		"large_roomimage2": req.body.large_roomimage2,
-		"movieimage": req.body.movieimage,
-		"moviename": "moviename",
-		"movieagerating": "movieagerating",
-		"movieduration": "movieduration",
-		"movieHorror": req.body.movieHorror,
-		"movieComedy": req.body.movieComedy,
-		"movieScience": req.body.movieScience,
-		"movieRomance": req.body.movieRomance,
-		"movieAnimation": req.body.movieAnimation,
-		"movieAdventure": req.body.movieAdventure,
-		"movieEmotional": req.body.movieEmotional,
-		"movieMystery": req.body.movieMystery,
-		"movieAction": req.body.movieAction,
-		"songimage": req.body.songimage,
-		"songname": "songname",
-		"songagerating": "songagerating",
-		"songduration": "songduration",
-		"songPop": req.body.songPop,
-		"songRock": req.body.songRock,
-		"songMetal": req.body.songMetal,
-		"songCountry": req.body.songCountry,
-		"songRap": req.body.songRap,
-		"songJazz": req.body.songJazz,
-		"songFolk": req.body.songFolk
+		room_title: roomlist.room_title,
+		small_roominfo: roomlist.small_roominfo,
+		small_roomprice: roomlist.small_roomprice,
+		small_roomimage1: roomlist.small_roomimage1,
+		small_roomimage2: roomlist.small_roomimage2,
+		med_roominfo: roomlist.med_roominfo,
+		med_roomprice: roomlist.med_roomprice,
+		med_roomimage: roomlist.med_roomimage,
+		large_roominfo: roomlist.large_roominfo,
+		large_roomprice: roomlist.large_roomprice,
+		large_roomimage1: roomlist.large_roomimage1,
+		large_roomimage2: roomlist.large_roomimage2,
+		movieimage: req.body.movieimage,
+		moviename: "moviename",
+		movieagerating: "movieagerating",
+		movieduration: "movieduration",
+		movieHorror: req.body.movieHorror,
+		movieComedy: req.body.movieComedy,
+		movieScience: req.body.movieScience,
+		movieRomance: req.body.movieRomance,
+		movieAnimation: req.body.movieAnimation,
+		movieAdventure: req.body.movieAdventure,
+		movieEmotional: req.body.movieEmotional,
+		movieMystery: req.body.movieMystery,
+		movieAction: req.body.movieAction,
+		songimage: req.body.songimage,
+		songname: "songname",
+		songagerating: "songagerating",
+		songduration: "songduration",
+		songPop: req.body.songPop,
+		songRock: req.body.songRock,
+		songMetal: req.body.songMetal,
+		songCountry: req.body.songCountry,
+		songRap: req.body.songRap,
+		songJazz: req.body.songJazz,
+		songFolk: req.body.songFolk
 	});
 }
 
@@ -419,32 +430,41 @@ async function editrooms_page(req, res) {
  * @param {Request}  req Express Request handle
  * @param {Response} res Express Response handle
  */
-async function editrooms_process(req, res) {
+async function editrooms_process(req, res, next) {
 	try {
-		const roomlist = await ModelRooms.create({
-			"email": req.body.email,
-			"prodlistid": req.body.prodlistid,
+		const small_roomimage1File = req.files.small_roomimage1[0];
+		const small_roomimage2File = req.files.small_roomimage2[0];
+		const med_roomimageFile    = req.files.med_roomimage[0];
+		const large_roomimage1File = req.files.large_roomimage1[0];
+		const large_roomimage2File = req.files.large_roomimage2[0];
+
+		const roomlist = await ModelRooms.findOne({
+			where: {
+				"email": "root@mail.com"
+			}
+		});
+		roomlist.update({
 			"room_title": req.body.room_title,
 			"small_roominfo": req.body.small_roominfo,
 			"small_roomprice": req.body.small_roomprice,
-			"small_roomimage1": req.body.small_roomimage1,
-			"small_roomimage2": req.body.small_roomimage2,
-
+			"small_roomimage1": small_roomimage1File.filename,
+			"small_roomimage2": small_roomimage2File.filename,
 			"med_roominfo": req.body.med_roominfo,
 			"med_roomprice": req.body.med_roomprice,
-			"med_roomimage": req.body.med_roomimage,
-
+			"med_roomimage": med_roomimageFile.filename,
 			"large_roominfo": req.body.large_roominfo,
 			"large_roomprice": req.body.large_roomprice,
-			"large_roomimage1": req.body.large_roomimage1,
-			"large_roomimage2": req.body.large_roomimage2
-		});
+			"large_roomimage1": large_roomimage1File.filename,
+			"large_roomimage2": large_roomimage2File.filename
+		})
+		roomlist.save();
 		console.log('Description created: $(roomlist.email)');
+		return res.redirect("/prodlist");
 	}
 	catch (error) {
 		console.error(`Credentials problem: ${req.body.email}`);
 		console.error(error);
-		return res.render('home', { errors: errors });
+		return res.render('editrooms');
 	}
 }
 
