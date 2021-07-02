@@ -1,0 +1,9 @@
+/ Saran
+npm i express-handlebars 
+npm i express
+npm i handlebars
+npm i serve-favicon
+npm i cookie-parser
+npm i path
+npm i @handlebars/allow-prototype-access
+npm i sequelize
