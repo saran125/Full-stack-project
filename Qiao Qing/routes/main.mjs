@@ -130,12 +130,6 @@ export function DeleteFilePath(...files) {
 			console.warn(`Attempting to delete non-existing file(s) ${file}`);
 	}
 }
-
-// const uploadMultiple = upload.fields([
-// 	    { name: 'homeimage', maxCount: 1 },
-// 	    { name: 'homepolicyimage', maxCount: 1 },
-// 	  ])
-
 router.post("/edithomeimagepolicy",
 upload.fields([
     { name: 'homeimage', maxCount: 1 },
@@ -159,14 +153,25 @@ upload.fields([
   ]),
 editrooms_process);
 
-router.get("/prodlist/chooseeditmoviesandsongs", chooseeditmoviesandsongs_page);
+router.get("/prodlist/chooseeditmovies", chooseeditmovies_page);
+
+router.get("/prodlist/chooseeditsongs", chooseeditsongs_page);
 
 router.get("/prodlist/editmovie", editmovie_page);
 router.post("/prodlist/editmovie", editmovie_process);
+
 router.get("/prodlist/editsong", editsong_page);
 router.post("/prodlist/editsong", editsong_process);
+
 router.get("/prodlist/createmovie", createmovie_page);
-router.post("/prodlist/createmovie", createmovie_process);
+router.post("/prodlist/createmovie",  
+upload.single('movieimage'),
+
+// ([
+//     { name: 'movieimage', maxCount: 1 }
+//   ]),
+  createmovie_process);
+
 router.get("/prodlist/createsong", createsong_page);
 router.post("/prodlist/createsong", createsong_process);
 
@@ -475,9 +480,40 @@ async function editrooms_process(req, res, next) {
  */
 // ---------------- 
 //	TODO:	Common URL paths here
-async function chooseeditmoviesandsongs_page(req, res) {
-	console.log("Prod List Choose Edit Movie/Songs page accessed");
-	return res.render('choosemoviesandsongs', {
+async function chooseeditmovies_page(req, res) {
+	const createmovies = await ModelMovies.findOne({
+		where: {
+			"email": "root@mail.com"
+		}
+	});
+	console.log("Prod List Choose Edit Movies page accessed");
+	return res.render('chooseeditmovies', {
+		movieimage: createmovies.movieimage,
+		moviename: createmovies.moviename,
+		movieagerating: createmovies.movieagerating,
+		movieduration: createmovies.movieduration,
+		movieHorror: createmovies.movieHorror,
+		movieComedy: createmovies.movieComedy,
+		movieScience: createmovies.movieScience,
+		movieRomance: createmovies.movieRomance,
+		movieAnimation: createmovies.movieAnimation,
+		movieAdventure: createmovies.movieAdventure,
+		movieEmotional: createmovies.movieEmotional,
+		movieMystery: createmovies.movieMystery,
+		movieAction: createmovies.movieAction
+	});
+};
+
+/**
+ * Renders the edithomebestreleases page
+ * @param {Request}  req Express Request handle
+ * @param {Response} res Express Response handle
+ */
+// ---------------- 
+//	TODO:	Common URL paths here
+async function chooseeditsongs_page(req, res) {
+	console.log("Prod List Choose Edit Songs page accessed");
+	return res.render('chooseeditsongs', {
 
 	});
 };
@@ -501,33 +537,42 @@ async function createmovie_page(req, res) {
  * @param {Request}  req Express Request handle
  * @param {Response} res Express Response handle
  */
-async function createmovie_process(req, res) {
+async function createmovie_process(req, res, next) {
 	try {
+		// const movieimageFile = req.file[0];
 		const createmovies = await ModelMovies.create({
-			"email": req.body.email,
-			"prodlistid": req.body.prodlistid,
-			"choosemovieid": req.body.choosemovieid,
-			"movieimage": req.body.movieimage,
+			"uuid": "00000000-0000-0000-0000-000000000000",
+			"email": "root@mail.com",
+			"role": "admin",
+			"verified": true,
+			"prodlistid": "prodlistid",
+			"choosemovieid": "choosemovieid",
+			"movieimage": req.file.filename,
 			"moviename": req.body.moviename,
 			"movieagerating": req.body.movieagerating,
 			"movieduration": req.body.movieduration,
 
-			"movieHorror": req.body.movieHorror,
-			"movieComedy": req.body.movieComedy,
-			"movieScience": req.body.movieScience,
-			"movieRomance": req.body.movieRomance,
-			"movieAnimation": req.body.movieAnimation,
-			"movieAdventure": req.body.movieAdventure,
-			"movieEmotional": req.body.movieEmotional,
-			"movieMystery": req.body.movieMystery,
-			"movieAction": req.body.movieAction
+			"movieHorror": Boolean(req.body.movieHorror),
+			"movieComedy": Boolean(req.body.movieComedy),
+			"movieScience": Boolean(req.body.movieScience),
+			"movieRomance": Boolean(req.body.movieRomance),
+			"movieAnimation": Boolean(req.body.movieAnimation),
+			"movieAdventure": Boolean(req.body.movieAdventure),
+			"movieEmotional": Boolean(req.body.movieEmotional),
+			"movieMystery": Boolean(req.body.movieMystery),
+			"movieAction": Boolean(req.body.movieAction)
 		});
 		console.log('Description created: $(createmovies.email)');
+		createmovies.save();
+		return res.redirect("/prodlist/chooseeditmovies", 
+		{ email: email });
 	}
 	catch (error) {
 		console.error(`Credentials problem: ${req.body.email}`);
 		console.error(error);
-		return res.render('home', { errors: errors });
+		return res.render('createmovies', 
+		// { errors: errors }
+		);
 	}
 }
 
