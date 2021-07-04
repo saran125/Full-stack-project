@@ -28,12 +28,12 @@ div.blackblock {
   
   <div class="form-group">
   <h5>Movie Image</h5>
-  <input type="file" name="song_image" value="{{movie_image}}" required>
+  <input type="file" name="movieimage" value="{{movieimage}}" required>
   </div>
 
   <div class="form-group">
   <h5>Movie Name</h5>
-  <input type="movie_name" name="movie_name" class="form-control" value="{{movie_name}}" required>
+  <input type="moviename" name="moviename" class="form-control" value="{{movie_name}}" required>
   </div>
 
   <div class="form-group">
@@ -48,53 +48,32 @@ div.blackblock {
 
   <div class="form-group">
     <h5>Movie Genres</h5>
-		<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="chineseLang" value="Chinese"
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="chinese">Horror</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="englishLang" value="English"
-								   checked
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="englishLang">Comedy</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="malayLang" value="Malay"
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="malaylang">Science</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="tamilLang">Romance</label>
-						</div>
-            						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="tamilLang">Animation</label>
-						</div>
-            						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="tamilLang">Adventure</label>
-						</div>
-            						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="tamilLang">Emotional</label>
-						</div>
-            						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="tamilLang">Mystery</label>
-						</div>
-            						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="tamilLang" value="Tamil"
-								   onclick="ensureOneCheck('language', 'languageErr', 'butAddVideo')">
-							<label class="form-check-label" for="tamilLang">Action</label>
-						</div>
-  </div>
+	<input type="checkbox" name="movieHorror" value="false">
+	<label class="form-check-label" for="Horror">Horror</label>
+	<div class="blackbox"></div>
+	<input type="checkbox" name="movieComedy" value="false">
+	<label class="form-check-label" for="Comedy">Comedy</label>
+	<div class="blackbox"></div>
+	<input type="checkbox" name="movieScience" value="false">
+	<label class="form-check-label" for="Science">Science</label>
+	<div class="blackbox"></div>
+	<input type="checkbox" name="movieRomance" value="false">
+	<label class="form-check-label" for="Romance">Romance</label>
+	<div class="blackbox"></div>
+	<input type="checkbox" name="movieAnimation" value="false">
+	<label class="form-check-label" for="Animation">Animation</label>
+	<div class="blackbox"></div>
+	<input type="checkbox" name="movieAdventure" value="false">
+	<label class="form-check-label" for="Adventure">Adventure</label>
+	<div class="blackbox"></div>
+	<input type="checkbox" name="movieEmotional" value="false">
+	<label class="form-check-label" for="Emotional">Emotional</label>
+	<div class="blackbox"></div>
+	<input type="checkbox" name="movieMystery" value="false">
+	<label class="form-check-label" for="Mystery">Mystery</label>
+	<div class="blackbox"></div>
+	<input type="checkbox" name="movieAction" value="false">
+	<label class="form-check-label" for="Action">Action</label>
   </div>
 
   <div class="submit">
