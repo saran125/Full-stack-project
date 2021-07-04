@@ -263,23 +263,22 @@ export function initialize_models(database) {
 			role    		: "admin",
 			verified		: true,
             prodlistid		: "prodlistid",
-            room_title 		: "room_title",
 			choosemovieid	: "choosemovieid",
 
-            movieimage		: "movieimage",
-            moviename		: "moviename",
-            movieagerating	: "movieagerating",
-            movieduration	: "movieduration",
+            movieimage		: generate_movies.movieimage,
+            moviename		: generate_movies.moviename,
+            movieagerating	: generate_movies.movieagerating,
+            movieduration	: generate_movies.movieduration,
 
-            movieHorror		: "movieHorror",
-            movieComedy		: "movieComedy",
-            movieScience	: "movieScience",
-        	movieRomance	: "movieRomance",
-            movieAnimation	: "movieAnimation",
-            movieAdventure	: "movieAdventure",
-            movieEmotional	: "movieEmotional",
-            movieMystery	: "movieMystery",
-            movieAction		: "movieAction"
+            movieHorror		: generate_movies.movieHorror,
+            movieComedy		: generate_movies.movieComedy,
+            movieScience	: generate_movies.movieScience,
+        	movieRomance	: generate_movies.movieRomance,
+            movieAnimation	: generate_movies.movieAnimation,
+            movieAdventure	: generate_movies.movieAdventure,
+            movieEmotional	: generate_movies.movieEmotional,
+            movieMystery	: generate_movies.movieMystery,
+            movieAction		: generate_movies.movieAction
 		};
 		//	Find for existing account with the same id, create or update
 		var account = await ModelMovies.findOne({where: { "email": root_parameters.email }});

@@ -31,20 +31,71 @@ export class ModelMovies extends Model {
             "prodlistid"     : { type: DataTypes.STRING(128) },
             "choosemovieid"     : { type: DataTypes.STRING(128) },
 
-            "movieimage" : { type: DataTypes.STRING(650), allowNull: false },
-            "moviename" : { type: DataTypes.STRING(650), allowNull: false },
-            "movieagerating" : { type: DataTypes.STRING(650), allowNull: false },
-            "movieduration" : { type: DataTypes.STRING(650), allowNull: false },
-
-            "movieHorror" : { type: DataTypes.STRING(65), allowNull: false },
-            "movieComedy" : { type: DataTypes.STRING(65), allowNull: false },
-            "movieScience" : { type: DataTypes.STRING(65), allowNull: false },
-            "movieRomance" : { type: DataTypes.STRING(65), allowNull: false },
-            "movieAnimation" : { type: DataTypes.STRING(65), allowNull: false },
-            "movieAdventure" : { type: DataTypes.STRING(65), allowNull: false },
-            "movieEmotional" : { type: DataTypes.STRING(65), allowNull: false },
-            "movieMystery" : { type: DataTypes.STRING(65), allowNull: false },
-            "movieAction" : { type: DataTypes.STRING(65), allowNull: false }
+            "movieimage" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('movieimage', value);
+				} 
+			},
+            "moviename" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('moviename', value);
+				} 
+			},
+            "movieagerating" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('movieagerating', value);
+				} 
+			},
+            "movieduration" : { type: DataTypes.STRING(650), allowNull: false,
+				set(value){ 
+					this.setDataValue('movieduration', value);
+				} 
+			},
+            "movieHorror" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieHorror', value);
+				} 
+			},
+            "movieComedy" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieComedy', value);
+				} 
+			},
+            "movieScience" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieScience', value);
+				} 
+			},
+            "movieRomance" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieRomance', value);
+				} 
+			},
+            "movieAnimation" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieAnimation', value);
+				} 
+			},
+            "movieAdventure" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieAdventure', value);
+				} 
+			},
+            "movieEmotional" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieEmotional', value);
+				} 
+			},
+            "movieMystery" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieMystery', value);
+				} 
+			},
+            "movieAction" : { type: DataTypes.STRING(65), allowNull: false, 
+				set(value){ 
+					this.setDataValue('movieAction', value);
+				} 
+			}
 		}, {
 			"sequelize": database,
 			"modelName": "Movies",
