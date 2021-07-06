@@ -1,6 +1,6 @@
 import ORM from 'sequelize'
 const { Sequelize, DataTypes, Model } = ORM;
-
+// to VS from github
 /**
  * A database entity model that represents contents in the database.
  * This model is specifically designed for users
