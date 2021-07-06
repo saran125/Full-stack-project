@@ -3,7 +3,7 @@ import {ModelFaq} from '../data/faq.mjs';
 import { flashMessage } from '../utils/flashmsg.mjs'
 const router = Router();
 export default router;
-
+// Hello nigel
 router.get("/faq",      async function(req, res) {
 	console.log("faq page accessed");
 	return res.render('createfaq');
