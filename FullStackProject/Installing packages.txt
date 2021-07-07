@@ -8,4 +8,9 @@ npm i @handlebars/allow-prototype-access
 npm i sequelize
 npm i multer --save
 npm 
+<<<<<<< HEAD
 hello hsb dhfb 
+=======
+
+hello
+>>>>>>> d74fe5ea4ed5288f4b882308a528c37193ea3dc5
