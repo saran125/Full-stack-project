@@ -937,6 +937,48 @@ router.get("/ticket",     function(req, res) {
 
 	});
 });
-
-
-
+router.get("/ticketlist/tickettable", tickettable);
+router.get("/ticketlist/tickettable-data", tickettable_data);
+async function tickettable(req, res) {
+	return res.render('tickets');
+}
+async function tickettable_data(req, res) {
+	const ticket = await Modelticket.findAll({ raw: true });
+	return res.json({
+		"total": ticket.length,
+		"rows": ticket
+	});
+}
+router.get("/view/:uuid", async function (req, res, next) {
+	const tid = req.params.uuid;
+	console.log("ticket page accessed");
+	try {
+		if (tid == undefined) {
+			throw new HttpError(400, "Target user id is invalid");
+		}
+		const target_user = await Modelticket.findOne({
+			where: {
+				uuid: tid
+			}
+		});
+		if (target_user == null) {
+			throw new HttpError(410, "User doesn't exists");
+		}
+		console.log(target_user);
+			return res.render("view", {
+				target: target_user
+			});
+	}
+	catch (error) {
+		console.error(`Invalid request: ${tid}`);
+		error.code = (error.code == undefined) ? 500 : error.code;
+		console.log(error);
+		return next(error);
+	}
+});
+import payment from '../routes/payment.mjs';
+router.use("/payment", payment );
+router.get("/paymentOption", async function (req, res) {
+	console.log("Choosing payment method");
+	return res.render('PaymentOption');
+});
