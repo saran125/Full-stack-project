@@ -7,3 +7,4 @@ npm i path
 npm i @handlebars/allow-prototype-access
 npm i sequelize
 npm i multer --save
+npm 
