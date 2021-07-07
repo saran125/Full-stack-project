@@ -1,0 +1,27 @@
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+
+
+
+<table
+  id="table"
+  data-toggle="table"
+  data-search="true"
+  data-pagination="true"
+  data-height="460"
+  <!--data-url="/template/retrievefaq-data">-->
+  >
+<h1>Faq List</h1>
+  <thead>
+      <tr>
+        <th data-field="questions">Question</th>
+        <th data-field="answers">Answer</th>
+      </tr>
+  </thead>
+  {{#each faq}}
+    <tr>
+      <td>{{questions}}</td>
+      <td>{{answers}}</td>
+    </tr>
+  {{/each}}
+</table>
