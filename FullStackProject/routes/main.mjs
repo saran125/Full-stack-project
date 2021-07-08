@@ -982,3 +982,11 @@ router.get("/paymentOption", async function (req, res) {
 	console.log("Choosing payment method");
 	return res.render('PaymentOption');
 });
+router.get("/logout", async function(req,res){
+	req.session.destroy((err) => {
+		if (err){
+			return console.log(err);
+		}
+		res.redirect("/home");
+	});
+});
