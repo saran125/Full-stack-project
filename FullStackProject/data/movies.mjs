@@ -1,5 +1,5 @@
 import ORM from 'sequelize'
-const { Sequelize, DataTypes, Model } = ORM;
+const { Sequelize, DataTypes, Model, Op } = ORM;
 
 /**
  * For enumeration use
@@ -22,7 +22,7 @@ export class ModelMovies extends Model {
 	**/
 	static initialize(database) {
 		ModelMovies.init({
-			"uuid"       : { type: DataTypes.CHAR(36),    foreignKey: true, defaultValue: DataTypes.UUIDV4 },
+			"uuid"       : { type: DataTypes.CHAR(36),    primaryKey: true, defaultValue: DataTypes.UUIDV4 },
 			"dateCreated": { type: DataTypes.DATE(),      allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
 			"dateUpdated": { type: DataTypes.DATE(),      allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
 			"email"      : { type: DataTypes.STRING(128), allowNull: false },
