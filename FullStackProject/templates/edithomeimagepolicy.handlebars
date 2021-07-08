@@ -13,18 +13,18 @@
     {{!-- Gonna replace with flashmsg --}}
 
   <h5>Home Image</h5>
-  <input type="file" name="homeimage" accept="image/png,image/jpeg,image/jpg,image/gif" required>
+  <input type="file" name="homeimage" value="{{ homeimagepolicy.homeimage}}" accept="image/png,image/jpeg,image/jpg,image/gif" required>
   </div>
   {{!-- <img src="<%= typeof homeimage != 'undefined' ? homeimage : '' %>" class="responsive-img"> --}}
 
   <h5>Home Policy</h5>
   <div class="form-group">
-    <input type="homepolicy" name="homepolicy" class="form-control" value="{{homepolicy}}" required>
+    <input type="homepolicy" name="homepolicy" class="form-control" value="{{ homeimagepolicy.homepolicy}}" required>
   </div>
 
   <h5>Policy Image</h5>
   <div>
-  <input type="file" name="homepolicyimage" accept="image/png,image/jpeg,image/jpg,image/gif" required>
+  <input type="file" value="{{ homeimagepolicy.homepolicyimage}}" name="homepolicyimage" accept="image/png,image/jpeg,image/jpg,image/gif" required>
   </div>
   
   <div class="blackblock1">
